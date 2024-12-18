@@ -86,7 +86,7 @@ if (isset($_GET['id'])) {
               <?php foreach ($singleImage as $image): ?>
                 <div class="item">
                   <div class="thumb">
-                    <img src="assets/images/<?php echo $image->image; ?>" alt="">
+                  <img src="<?php echo CITIESIMAGES; ?>/<?php echo $image->image; ?>" alt="">
                     <h4><?php echo $image->name; ?></h4>
                   </div>
                 </div>
@@ -117,7 +117,7 @@ if (isset($_GET['id'])) {
           <?php foreach ($allCities as $city): ?>
             <div class="item">
               <div class="thumb">
-                <img src="assets/images/<?php echo $city->image; ?>" alt="">
+              <img src="<?php echo CITIESIMAGES; ?>/<?php echo $city->image; ?>" alt="">
                 <div class="text">
                   <h4><?php echo $city->name; ?><br><span><i class="fa fa-users"></i><?php echo $city->count_bookings; ?>
                       Check-Ins</span></h4>

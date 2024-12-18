@@ -2,6 +2,10 @@
 <?php require "../config/config.php"; ?>
 <?php
 
+if(isset($_SESSION["username"])){
+    header("location: ".APPURL."");
+}
+
 if (isset($_POST['submit'])) {
 
     if (empty($_POST['username']) or empty($_POST['email']) or empty($_POST['password'])) {

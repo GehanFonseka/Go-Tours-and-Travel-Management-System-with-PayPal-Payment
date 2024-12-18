@@ -94,7 +94,7 @@ $allCountries = $countries->fetchAll(PDO::FETCH_OBJ);
                   <div class="row">
                     <div class="col-lg-4 col-sm-5">
                       <div class="image">
-                        <img src="assets/images/<?php echo $country->image; ?>" alt="">
+                        <img src="<?php echo COUNTRIESIMAGES; ?>/<?php echo $country->image; ?>" alt="">
                       </div>
                     </div>
                     <div class="col-lg-8 col-sm-7">

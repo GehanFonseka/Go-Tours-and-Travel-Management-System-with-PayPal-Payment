@@ -1,0 +1,26 @@
+/* Default Light Mode */
+body.light-mode {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  /* Dark Mode */
+  body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  
+  /* Header Styling */
+  .header-area.light-mode {
+    background-color: #ffffff;
+  }
+  
+  .header-area.dark-mode {
+    background-color: #1c1c1c;
+  }
+  
+  /* Button Styling */
+  button {
+    transition: all 0.3s ease-in-out;
+  }
+  

@@ -1,24 +1,64 @@
 <?php require "../includes/header.php"; ?>
 <?php require "../config/config.php"; ?>
 
+<?php
 
-  <div class="reservation-form">
-    <div class="container">
-      <div class="row">
-        
-        <div class="col-lg-12">
-          <form id="reservation-form" name="gs" method="submit" role="search" action="#">
-            <div class="row">
-              <div class="col-lg-12">
-                <h4>Login</h4>
-              </div>
-              <div class="col-md-12">
-                  <fieldset>
-                      <label for="Name" class="form-label">Your Email</label>
-                      <input type="text" name="Name" class="Name" placeholder="email" autocomplete="on" required>
-                  </fieldset>
-              </div>
-              <!-- <div class="col-lg-6">
+if(isset($_SESSION["username"])){
+  header("location: ".APPURL."");
+}
+
+if (isset($_POST["submit"])) {
+
+  if (empty($_POST["email"]) or empty($_POST["password"])) {
+    echo "<script>alert('some inputs are empty');</script>";
+  } else {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    //checking the email with query
+
+    $login = $conn->query("SELECT * FROM users WHERE email='$email'");
+    $login->execute();
+
+    $fetch = $login->fetch(PDO::FETCH_ASSOC);
+
+    if ($login->rowCount() > 0) {
+
+      //checking password with query
+      if (password_verify($password, $fetch["mypassword"])) {
+
+        $_SESSION['username'] = $fetch['username'];
+        $_SESSION['user_id'] = $fetch['id'];
+
+        header("location: ".APPURL."");
+
+      } else {
+        echo "<script>alert('email or password are invalid');</script>";
+      }
+    } else {
+      echo "<script>alert('email or password are invalid');</script>";
+    }
+  }
+}
+?>
+
+<div class="reservation-form">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-12">
+        <form id="reservation-form" method="POST" role="search" action="login.php">
+          <div class="row">
+            <div class="col-lg-12">
+              <h4>Login</h4>
+            </div>
+            <div class="col-md-12">
+              <fieldset>
+                <label for="Name" class="form-label">Your Email</label>
+                <input type="text" name="email" class="Name" placeholder="email" autocomplete="on" required>
+              </fieldset>
+            </div>
+            <!-- <div class="col-lg-6">
                 <fieldset>
                     <label for="Number" class="form-label">Your Phone Number</label>
                     <input type="text" name="Number" class="Number" placeholder="Ex. +xxx xxx xxx" autocomplete="on" required>
@@ -55,23 +95,23 @@
                   </fieldset>
               </div> -->
 
-              <div class="col-md-12">
-                <fieldset>
-                    <label for="Name" class="form-label">Your Password</label>
-                    <input type="text" name="Name" class="Name" placeholder="password" autocomplete="on" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-12">                        
-                  <fieldset>
-                      <button class="main-button">login</button>
-                  </fieldset>
-              </div>
+            <div class="col-md-12">
+              <fieldset>
+                <label for="Name" class="form-label">Your Password</label>
+                <input type="password" name="password" class="Name" placeholder="password" autocomplete="on" required>
+              </fieldset>
             </div>
-          </form>
-        </div>
+            <div class="col-lg-12">
+              <fieldset>
+                <button name="submit" typr="submit" class="main-button">login</button>
+              </fieldset>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>
 
- 
+
 <?php require "../includes/footer.php"; ?>
