@@ -2,6 +2,7 @@
 <?php require "../../config/config.php"; ?>
 
 <?php
+
 if(!empty($_GET['id']) && !empty($_GET['status'])) {
     $id = intval($_GET['id']);
     $status = htmlspecialchars($_GET['status']);

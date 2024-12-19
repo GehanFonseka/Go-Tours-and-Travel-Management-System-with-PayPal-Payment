@@ -1,8 +1,5 @@
 /*
 
-TemplateMo 580 Woox Travel
-
-https://templatemo.com/tm-580-woox-travel
 
 */
 /* ---------------------------------------------
@@ -2004,7 +2001,11 @@ Deals Page Style
   border-radius: 50%;
   transition: all .3s;
 }
-
+.pay-page {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
 .amazing-deals ul.page-numbers li.active a,
 .amazing-deals ul.page-numbers li a:hover {
   background-color: #22b3c1;

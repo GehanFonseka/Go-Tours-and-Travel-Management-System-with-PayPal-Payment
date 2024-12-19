@@ -18,10 +18,11 @@ if (isset($_GET['id'])) {
 
 
   //cities with booking number
-  $cities = $conn->query("SELECT cities.id AS id, cities.name AS name, cities.image AS image, cities.trip_days AS trip_days, cities.price
-                          AS price,
-                          COUNT(bookings.city_id) AS count_bookings FROM cities LEFT JOIN bookings ON cities.id = bookings.city_id 
-                          WHERE cities.country_id = '$id' GROUP BY(bookings.city_id)");
+  $cities = $conn->query("SELECT cities.id AS id, cities.name 
+    AS name, cities.image AS image, cities.trip_days AS trip_days, cities.price AS price,
+      COUNT(bookings.city_id) AS count_bookings FROM cities LEFT JOIN 
+    bookings ON cities.id = bookings.city_id WHERE cities.country_id = '$id' GROUP BY(bookings.city_id)");
+
 
   $cities->execute();
 
@@ -42,21 +43,13 @@ if (isset($_GET['id'])) {
 
 
 
-  // Check if country data was found
-  if ($singleCountry) {
-    $countryName = $singleCountry->name;
-    $countryDescription = $singleCountry->description;
-  } else {
-    $countryName = "Country Not Found";
-    $countryDescription = "Sorry, the country information could not be found.";
-  }
+
 } else {
   header("location: 404.php");
 }
 ?>
 
-<!-- ***** Main Banner Area Start ***** -->
-<div class="about-main-content">
+<div style="margin-top: -10px;" class="about-main-content">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -64,8 +57,10 @@ if (isset($_GET['id'])) {
           <div class="blur-bg"></div>
           <h4>EXPLORE OUR COUNTRY</h4>
           <div class="line-dec"></div>
-          <h2>Welcome To <?php echo htmlspecialchars($countryName); ?></h2>
-          <p><?php echo htmlspecialchars($countryDescription); ?></p>
+          <h2>Welcome To <?php echo $singleCountry->name; ?></h2>
+          <p>
+            <?php echo $singleCountry->description; ?>
+          </p>
           <div class="main-button">
           </div>
         </div>
@@ -73,6 +68,8 @@ if (isset($_GET['id'])) {
     </div>
   </div>
 </div>
+<!-- ***** Main Banner Area End ***** -->
+
 <div class="cities-town">
   <div class="container">
     <div class="row">
@@ -85,12 +82,15 @@ if (isset($_GET['id'])) {
             <div class="owl-cites-town owl-carousel">
               <?php foreach ($singleImage as $image): ?>
                 <div class="item">
-                  <div class="thumb">
-                  <img src="<?php echo CITIESIMAGES; ?>/<?php echo $image->image; ?>" alt="">
-                    <h4><?php echo $image->name; ?></h4>
-                  </div>
-                </div>
+  <div class="thumb">
+    <img src="<?php echo CITIESIMAGES; ?>/<?php echo $image->image; ?>" alt="" style="width: 400px; height: 400px; object-fit: cover;">
+    <h4><?php echo $image->name; ?></h4>
+  </div>
+</div>
+
+
               <?php endforeach; ?>
+
             </div>
           </div>
         </div>
@@ -117,10 +117,10 @@ if (isset($_GET['id'])) {
           <?php foreach ($allCities as $city): ?>
             <div class="item">
               <div class="thumb">
-              <img src="<?php echo CITIESIMAGES; ?>/<?php echo $city->image; ?>" alt="">
+              <img src="<?php echo CITIESIMAGES; ?>/<?php echo $city->image; ?>" alt="" style="width: 400px; height: 400px; object-fit: cover;">
                 <div class="text">
-                  <h4><?php echo $city->name; ?><br><span><i class="fa fa-users"></i><?php echo $city->count_bookings; ?>
-                      Check-Ins</span></h4>
+                  <h4><?php echo $city->name; ?><br><span><i class="fa fa-users"></i> <?php echo $city->count_bookings; ?>
+                      Check Ins</span></h4>
                   <h6>$<?php echo $city->price; ?><br><span>/person</span></h6>
                   <div class="line-dec"></div>
                   <ul>
@@ -134,14 +134,12 @@ if (isset($_GET['id'])) {
                       <a href="reservation.php?id=<?php echo $city->id; ?>">Make a Reservation</a>
                     </div>
                   <?php else: ?>
-                    <p style="color: #000000; font-weight: bold;">Please Login to make a Reservation</p>
+                    <p>login to make a reservation</p>
                   <?php endif; ?>
-
-
                 </div>
               </div>
             </div>
-          <?php endforeach ?>
+          <?php endforeach; ?>
         </div>
       </div>
     </div>
@@ -172,7 +170,7 @@ if (isset($_GET['id'])) {
                 </div>
                 <div class="col-lg-6">
                   <h4><?php echo $num_bookings->count_bookings; ?></h4>
-                  <span>Different Check-ins Yearly</span>
+                  <span>Different Check-ins</span>
                 </div>
               </div>
             </div>
@@ -185,5 +183,7 @@ if (isset($_GET['id'])) {
     </div>
   </div>
 </div>
+
+
 
 <?php require "includes/footer.php"; ?>

@@ -1,11 +1,19 @@
-<?php require "includes/header.php"; ?> <!-- Include the header -->
-<?php require "config/config.php"; ?>   <!-- Include the configuration file -->
+<?php 
+ob_start();
+require "includes/header.php"; 
+ require "config/config.php"; ?>   <!-- Include the configuration file -->
 <?php
+
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
 if(!isset($_SERVER['HTTP_REFERER'])){
         // redirect them to your desired location
         header('location: http://localhost/wooxtravel/index.php');
         exit;
     }
+ ob_end_flush();
 ?>
 <title>Pay with PayPal</title>
 

@@ -86,7 +86,7 @@
           <div class="item">
             <div class="row">
               <div class="col-lg-6">
-                <div class="image">
+                <div style="height:350px"  class="image">
                 <img src="<?php echo CITIESIMAGES; ?>/<?php echo $City->image; ?>" alt="">
                 </div>
               </div>

@@ -1,7 +1,12 @@
-<?php require "includes/header.php"; ?>
-<?php require "config/config.php"; ?>
+<?php 
+ob_start();
+require "includes/header.php"; 
+require "config/config.php"; ?>
 
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 
 if(!isset($_SESSION["username"])){
   header("location: ".APPURL."");
@@ -67,7 +72,7 @@ if (isset($_POST['submit'])) {
 } else {
   header("location: 404.php");
 }
-
+ob_end_flush(); 
 ?>
 
 

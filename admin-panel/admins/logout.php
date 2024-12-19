@@ -4,6 +4,6 @@ session_unset();
 session_destroy();
 
 // Corrected the header function syntax
-header("Location: http://localhost/wooxtravel/admin-panel/admins/login-admins.php");
+header("Location: http://localhost/wooxtravel/index.php");
 exit(); // Good practice to terminate script execution after a redirect
 ?>
